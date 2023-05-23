@@ -76,24 +76,3 @@ int shell(void)
 	free(input);
 	return (0);
 }
-
-/**
- * _free_args - frees user command + arguments
- * @args: pointer to user command + arguments.
- * Return: void.
- */
-void _free_args(char **args)
-{
-	int i;
-
-	if (args == NULL)
-		return;
-
-	for (i = 0; i < MAX_ARGUMENTS && args[i] != NULL; i++)
-	{
-		free(args[i]);
-		args[i] = NULL;
-	}
-	free(args);
-	args = NULL;
-}
