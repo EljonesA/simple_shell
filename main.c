@@ -6,7 +6,6 @@
  */
 int main(void)
 {
-    shell();
-    
-    return (0);
+	shell();
+	return (0);
 }
