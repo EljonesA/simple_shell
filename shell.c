@@ -50,7 +50,5 @@ void prompt(char *av[], char **env)
 			waitpid(child_pid, &status, 0);
 		}
 	}
-	free(input);
-
-    return;
+       	free(input);
 }
