@@ -16,7 +16,7 @@ int shell(void)
 	char *env[] = {NULL}; /* empty environment variable array */
 
 	while (
-			write(STDOUT_FILENO, "$ ", 2) != -1 &&
+			write(STDOUT_FILENO, "#cisfun$ ", 2) != -1 &&
 			getline(&input, &input_len, stdin) != EOF
 	      )
 	{
