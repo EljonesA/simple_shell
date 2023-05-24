@@ -1,3 +1,5 @@
+#include "shell.h"
+
 /**
  * _strcmp - compares two strings
  * @s1: pointer to first string.
@@ -13,11 +15,12 @@ int _strcmp(char *s1, char *s2)
 		if (s1[i] != s2[i])
 		{
 			return (1);
-			i++;
 		}
-		if (s1[i] != s2[i])
-			return (1);
-		return (0);
+		i++;
+	}
+	if (s1[i] != s2[i])
+		return (1);
+	return (0);
 }
 /**
  * _strlen - computes length of a string

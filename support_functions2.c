@@ -1,3 +1,5 @@
+#include "shell.h"
+
 /**
  * _strcpy - copies a string
  * @dest: pointer to destination string.
@@ -48,22 +50,27 @@ int _atoi(char *s)
 			sign = -1;
 		else if (*s >= '0' && *s <= '9')
 			result = result * 10 + (*s - '0');
+
 		s++;
-		return (sign * result);
 	}
+	return (sign * result);
 }
 /**
  * _free_args - free input
  * @args: argument passed
+ * Return: void.
  */
 void _free_args(char **args)
 {
+	int i;
+
 	if (args == NULL)
 		return;
-	for (int i = 0; i < MAX_ARGUMENTS && args[i] != NULL; i++)
+	for (i = 0; i < MAX_ARGUMENTS && args[i] != NULL; i++)
 	{
 		free(args[i]);
 		args[i] = NULL;
 	}
 	free(args);
+	args = NULL;
 }
