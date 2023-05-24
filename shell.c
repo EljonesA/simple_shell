@@ -11,7 +11,7 @@ void prompt(char *av[], char **env)
 
 	while (1)
 	{
-		printf("$ ");
+		printf("#cisfun$ ");
 		fflush(stdout);
 
 		new_result = getline(&input, &input_size, stdin);
@@ -21,7 +21,7 @@ void prompt(char *av[], char **env)
 			free(input);
 			exit(EXIT_SUCCESS);
 		}
-		input[strcspn(input, "\n")] = '\0';
+		input[_strcspn(input, "\n")] = '\0';
 
 		child_pid = fork();
 		argv[0] = input;

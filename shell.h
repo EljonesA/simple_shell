@@ -11,6 +11,7 @@
 #define MAX_ARGS 10
 extern char **environ;
 void prompt(char *av[], char **env);
+size_t _strcspn(const char *str, const char *delimiters);
 /* >>>> support_functions.c <<<< */
 int _strcmp(char *s1, char *s2);
 size_t _strlen(char *s);
