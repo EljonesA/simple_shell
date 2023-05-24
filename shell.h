@@ -8,9 +8,9 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#define MAX_ARGUMENTS 10
+#define MAX_ARGS 10
 extern char **environ;
-
+void prompt(char *av[], char **env);
 /* >>>> support_functions.c <<<< */
 int _strcmp(char *s1, char *s2);
 size_t _strlen(char *s);
