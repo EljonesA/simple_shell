@@ -19,7 +19,7 @@ void prompt(char *av[], char **env)
 		if (new_result == -1)
 		{
 			free(input);
-			exit(EXIT_FAILURE);
+			return;
 		}
 		input[strcspn(input, "\n")] = '\0';
 
@@ -28,7 +28,7 @@ void prompt(char *av[], char **env)
 		if (child_pid == -1)
 		{
 			printf("failed fork\n");
-			exit(EXIT_FAILURE);
+			exit(EXIT_SUCCESS);
 		}
 		else if (child_pid == 0)
 		{
