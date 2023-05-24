@@ -19,7 +19,7 @@ void prompt(char *av[], char **env)
 		if (new_result == -1)
 		{
 			free(input);
-			return;
+			exit(EXIT_SUCCESS);
 		}
 		input[strcspn(input, "\n")] = '\0';
 
@@ -42,7 +42,7 @@ void prompt(char *av[], char **env)
 			}
 			argv[i] = NULL;
 			if (execve(argv[0], argv, env) == -1)
-				printf("%s : failed if cmd fails\n", av[0]);
+				printf("%s: No such file or directory\n", av[0]);
 			exit(EXIT_SUCCESS);
 		}
 		else
