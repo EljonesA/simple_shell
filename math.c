@@ -17,11 +17,3 @@ int sum(void)
 	return (0);
 }
 
-/**
- * main - calls sum function
- * Return: sum of two numbers.
- */
-int main(void)
-{
-	return (sum());
-}
