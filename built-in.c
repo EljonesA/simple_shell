@@ -53,7 +53,7 @@ void _setenv_command(char **args)
 {
 	if (args[1] == NULL || args[2] == NULL)
 	{
-		char *error_message = ": Usage: setenv VARIABLE VALUE";
+		char *error_message = ": Usage: setenv VARIABLE VALUE\n";
 
 		_print_error_message(args[0], error_message);
 		return;
@@ -74,7 +74,7 @@ void _unsetenv_command(char **args)
 {
 	if (args[1] == NULL)
 	{
-		char *error_message = ": Usage: unsetenv VARIABLE";
+		char *error_message = ": Usage: unsetenv VARIABLE\n";
 
 		_print_error_message(args[0], error_message);
 		return;

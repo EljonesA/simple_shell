@@ -16,24 +16,20 @@ int shell(void)
 	char **args;
 	char *env[] = {NULL}; /* empty environment variable array */
 
-	while (1)
-	{
-		write(STDOUT_FILENO, "$ ", 2);
+	int is_interactive = isatty(STDIN_FILENO);
 
-		if (isatty(STDIN_FILENO)) /* interactive vs non-interactive */
-		{
+	while ((is_interactive && write(STDOUT_FILENO, "$ ", 2) > 0)
+				|| (!is_interactive &&
+				  (nread = getline(&input, &input_len, stdin))
+				  != -1))
+	{
+		if (is_interactive)
 			nread = getline(&input, &input_len, stdin);
-			if (nread == -1)
-			{
-				write(STDOUT_FILENO, "\nEOF ecountered\n", 30);
-				break;
-			}
-		}
-		else
+
+		if (nread == -1)
 		{
-			nread = getline(&input, &input_len, stdin);
-			if (nread == -1)
-				break;
+			free(input);
+			break;
 		}
 
 		if (input[0] == '\n') /* handle empty command */
@@ -107,7 +103,6 @@ int shell(void)
  */
 int main(void)
 {
-        shell();
-
-        return (0);
+	shell();
+	return (0);
 }
