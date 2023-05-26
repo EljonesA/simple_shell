@@ -1,5 +1,7 @@
 #include "shell.h"
 
+int last_status; /* handle variable replacements */
+
 /**
  * _remove_newline_char - replace newline char with null char
  * @s: user input.
@@ -37,6 +39,10 @@ char **_handle_Command_line_arguments(char *input)
 	/* initilize memory for args array */
 	for (i = 0; i < MAX_ARGUMENTS + 1; i++)
 		args[i] = NULL;
+
+	/* comments - ignore everything after # */
+	token = strtok(input, "#");
+
 	token = strtok(input, " ");
 	while (token != NULL && args_count < MAX_ARGUMENTS)
 	{
@@ -47,7 +53,22 @@ char **_handle_Command_line_arguments(char *input)
 			exit(EXIT_FAILURE);
 		}
 
-		_strcpy(args[args_count], token);
+		/* handle variable replacement */
+		if (_strcmp(token, "$?") == 0)
+		{
+			char exit_status_str[4];
+			int exit_status_len = _itoa(WEXITSTATUS(last_status),
+					exit_status_str);
+			write(STDOUT_FILENO, exit_status_str, exit_status_len);
+		}
+		else if (_strcmp(token, "$$") == 0)
+		{
+			char pid_str[10];
+			int pid_len = _itoa(getpid(), pid_str);
+			write(STDOUT_FILENO, pid_str, pid_len);
+		}
+		else
+			_strcpy(args[args_count], token);
 		token = strtok(NULL, " ");
 		args_count++;
 	}
@@ -85,6 +106,8 @@ pid_t _execute_command(char **args, char **env)
 			exit(EXIT_FAILURE);
 		}
 	}
+	else
+		wait(&last_status); /* save exit status */
 	return (child_pid);
 }
 

@@ -52,3 +52,41 @@ void _free_args(char **args)
 	args = NULL;
 }
 
+/**
+ * _itoa - converts an integer to a string
+ * @value: input integer value
+ * @str: stores converted str
+ * Return: length of resulting string.
+ */
+int _itoa(int value, char *str)
+{
+	int i = 0;
+	int length, j;
+	bool is_negative = false;
+
+	if (value < 0) /* handle -ve numbers */
+	{
+		is_negative = true;
+		value = -value;
+	}
+	do { /* convert @digit to char in reverse order */
+		str[i++] = value % 10 + '0';
+		value /= 10;
+	} while (value != 0);
+
+	if (is_negative) /* add - sign if the number was negative */
+		str[i++] = '-';
+
+	/* reverse the string */
+	length = i;
+	for (j = 0; j < length / 2; j++)
+	{
+		char temp = str[j];
+
+		str[j] = str[length - j - 1];
+		str[length - j - 1] = temp;
+	}
+	str[i] = '\0';
+
+	return (length);
+}
