@@ -12,6 +12,8 @@
 #define MAX_ARGUMENTS 10
 extern char **environ;
 
+#define BUFFER_SIZE 1024
+
 /* >>>> support_functions.c <<<< */
 int _strcmp(char *s1, char *s2);
 size_t _strlen(char *s);
@@ -41,4 +43,6 @@ void _free_args(char **args);
 void _print_error_message(char *program_name, char *error_message);
 int _contains_only_spaces(char *input);
 int _itoa(int value, char *str);
+ssize_t _getline(char **line_ptr, size_t *n, int fd);
+
 #endif
