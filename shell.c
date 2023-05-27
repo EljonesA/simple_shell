@@ -20,7 +20,7 @@ int shell(void)
 
 	while ((is_interactive && write(STDOUT_FILENO, "$ ", 2) > 0)
 				|| (!is_interactive &&
-				  (nread = getline(&input, &input_len, STDIN_FILENO))
+				  (nread = getline(&input, &input_len, stdin))
 				  != -1))
 	{
 		if (is_interactive)

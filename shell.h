@@ -41,5 +41,4 @@ void _free_args(char **args);
 void _print_error_message(char *program_name, char *error_message);
 int _contains_only_spaces(char *input);
 int _itoa(int value, char *str);
-
 #endif
