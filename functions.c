@@ -135,7 +135,14 @@ void _check_PATH(char **args, char *env[])
 
 	while (path_token != NULL)
 	{
-		char command_path[1024];
+		size_t command_path_len = _strlen(path_token) + _strlen(args[0]
+				) + 3;
+		char *command_path = malloc(command_path_len);
+		if (command_path == NULL)
+		{
+			perror("malloc");
+			exit(EXIT_FAILURE);
+		}
 
 		command_path[0] = '\0'; /* initialize with null char */
 		_strconcat(command_path, path_token);
@@ -148,8 +155,10 @@ void _check_PATH(char **args, char *env[])
 			execve(command_path, args, env);
 			perror("execve");
 			free(path_copy); /* free allocated mem before exit */
+			free(command_path);
 			exit(EXIT_FAILURE);
 		}
+		free(command_path);
 		path_token = strtok(NULL, ":");
 	}
 	error_message = ": not found\n";
